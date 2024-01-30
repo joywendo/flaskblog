@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=sqlite:////~/Desktop/flask/database.db  # SQLite database path within the container
+    volumes:
+      - ./:/flask # Mount the flask  directory into the container
+
+  sqlite3:
+    image: nouchka/sqlite3:latest
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/flask
